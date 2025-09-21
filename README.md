@@ -31,3 +31,8 @@ The system computes a **Risk Score** for Maker–Checker pairs and sends alerts 
   - Advanced: Autoencoder, Isolation Forest
   - Future: Graph Neural Networks (GNN), LSTM/GRU
 - **Output**: Risk Score + explainability (SHAP/LIME) + dashboard.
+
+## 📄 Master Plan
+
+Chi tiết kế hoạch tổng thể của dự án:  
+👉 [docs/master_plan.md](docs/master_plan.md)
