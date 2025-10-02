@@ -10,7 +10,7 @@ flowchart LR
         EB[E-Banking]
         SWIFT[SWIFT – quốc tế]
         CITAD[CITAD – liên ngân hàng VN]
-        PC[PC/Workstation Logs (IP, Domain, Device)]
+        PC[Workstation Logs (IP, Domain, Device)]
     end
 
     subgraph Ingestion[Ingestion Layer]
