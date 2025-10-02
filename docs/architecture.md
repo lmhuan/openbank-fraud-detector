@@ -10,12 +10,12 @@ flowchart LR
         EB[E-Banking]
         SWIFT[SWIFT – quốc tế]
         CITAD[CITAD – liên ngân hàng VN]
-        PC[PC/Workstation Logs\n(IP, Domain, Device)]
+        PC[PC/Workstation Logs (IP, Domain, Device)]
     end
 
     subgraph Ingestion[Ingestion Layer]
-        ETL[Batch ETL\n(Airflow/Spark)]
-        KAFKA[Streaming\n(Kafka/Flink)]
+        ETL[Batch ETL (Airflow/Spark)]
+        KAFKA[Streaming (Kafka/Flink)]
     end
 
     subgraph Lakehouse[Lakehouse]
@@ -23,18 +23,18 @@ flowchart LR
         PROC[Processed Zone]
     end
 
-    FS[Feature Store\n(Feast/Redis)]
+    FS[Feature Store (Feast/Redis)]
 
     subgraph Models[Model Layer]
-        TRAIN[Offline Model Training\n(Batch ML)]
-        SCORE[Realtime Scoring\n(API)]
+        TRAIN[Offline Model Training (Batch ML)]
+        SCORE[Realtime Scoring (API)]
     end
 
-    RS[Risk Scoring Engine\n(Rules + SHAP/LIME)]
+    RS[Risk Scoring Engine (Rules + SHAP/LIME)]
 
     subgraph Output[Output Layer]
-        DASH[Dashboard\n(Streamlit/Dash)]
-        API[API Layer\n(REST/gRPC)]
+        DASH[Dashboard (Streamlit/Dash)]
+        API[API Layer (REST/gRPC)]
     end
 
     %% Connections
