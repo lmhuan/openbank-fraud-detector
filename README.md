@@ -41,3 +41,7 @@ Chi tiết kế hoạch tổng thể của dự án:
 
 Chi tiết kiến trúc hệ thống có thể xem tại file Word:  
 👉 [docs/system_architecture.docx](docs/system_architecture.docx)
+
+## 📊 Architecture
+
+Chi tiết kiến trúc hệ thống được mô tả trong [docs/architecture.md](docs/architecture.md).
