@@ -37,7 +37,7 @@ The system computes a **Risk Score** for Maker–Checker pairs and sends alerts 
 👉 [docs/master_plan.md](docs/master_plan.md)
 
 
-## 📊 Architecture
+## 📊 System Architecture
 
   
 👉 [docs/system_architecture.docx](docs/system_architecture.docx)
