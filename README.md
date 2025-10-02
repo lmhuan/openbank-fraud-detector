@@ -33,15 +33,13 @@ The system computes a **Risk Score** for Maker–Checker pairs and sends alerts 
 - **Output**: Risk Score + explainability (SHAP/LIME) + dashboard.
 
 ## 📄 Master Plan
-
-Chi tiết kế hoạch tổng thể của dự án:  
+  
 👉 [docs/master_plan.md](docs/master_plan.md)
 
-## 📑 System Architecture
-
-Chi tiết kiến trúc hệ thống có thể xem tại file Word:  
-👉 [docs/system_architecture.docx](docs/system_architecture.docx)
 
 ## 📊 Architecture
 
-Chi tiết kiến trúc hệ thống được mô tả trong [docs/architecture.md](docs/architecture.md).
+  
+👉 [docs/system_architecture.docx](docs/system_architecture.docx)
+
+ [docs/architecture.md](docs/architecture.md).
