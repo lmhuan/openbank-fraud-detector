@@ -1,4 +1,74 @@
-# 🗄️ Ingestion Data Model (ERD)
+# 🗄️ Ingestion Schema Design
+
+## 🎯 Mục tiêu
+Lớp Ingestion chịu trách nhiệm kết nối dữ liệu từ nhiều nguồn (CoreBanking, ATM, E-Banking, SWIFT, CITAD, PC logs) và đưa vào Lakehouse.  
+Thiết kế schema đảm bảo:
+- Có **common metadata** để quản lý trace, lineage.  
+- Có **schema chi tiết cho từng nguồn** để phục vụ phân tích và huấn luyện ML.  
+- Partition dữ liệu theo `event_date` và `source_system` trong Lakehouse để dễ quản lý.
+
+---
+
+## 📚 Common Schema
+
+| Field             | Type        | Mô tả |
+|-------------------|-------------|-------|
+| `event_id`        | STRING      | ID duy nhất cho sự kiện |
+| `event_timestamp` | TIMESTAMP   | Thời điểm sự kiện |
+| `ingest_timestamp`| TIMESTAMP   | Thời điểm ingestion |
+| `source_system`   | STRING      | Hệ thống nguồn (CoreBanking, ATM, EBANK, SWIFT, CITAD, PC) |
+| `raw_payload`     | JSON/BLOB   | Dữ liệu gốc |
+
+---
+
+## 📚 Schema chi tiết theo nguồn
+
+### CoreBanking
+- `transaction_id` (STRING)  
+- `account_id` (STRING)  
+- `amount` (DECIMAL)  
+- `currency` (STRING)  
+- `transaction_type` (STRING)  
+- `branch_code` (STRING)  
+
+### ATM
+- `atm_id` (STRING)  
+- `card_number` (STRING)  
+- `txn_code` (STRING)  
+- `status_code` (STRING)  
+
+### E-Banking
+- `user_id` (STRING)  
+- `session_id` (STRING)  
+- `device_id` (STRING)  
+- `ip_address` (STRING)  
+- `action_type` (STRING)  
+
+### SWIFT
+- `message_id` (STRING)  
+- `bic_sender` (STRING)  
+- `bic_receiver` (STRING)  
+- `amount` (DECIMAL)  
+- `currency` (STRING)  
+- `country_code` (STRING)  
+
+### CITAD (VN Domestic Clearing)
+- `txn_id` (STRING)  
+- `bank_sender` (STRING)  
+- `bank_receiver` (STRING)  
+- `amount` (DECIMAL)  
+- `currency` (STRING)  
+
+### PC / Workstation Logs
+- `device_id` (STRING)  
+- `user_id` (STRING)  
+- `ip_address` (STRING)  
+- `domain_accessed` (STRING)  
+- `process_executed` (STRING)  
+
+---
+
+## 🖼️ ERD (Entity Relationship Diagram)
 
 ```mermaid
 erDiagram
