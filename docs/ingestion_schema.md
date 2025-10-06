@@ -169,6 +169,7 @@ erDiagram
     COMMON ||--o{ CORE_ACCESS_LOGS : contains
 
 
+```mermaid
 flowchart LR
     subgraph Ingestion
         A[CORE_ACCESS_LOGS]
