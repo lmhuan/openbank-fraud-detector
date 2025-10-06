@@ -137,22 +137,23 @@ Kết hợp log hệ thống máy trạm nội bộ:
 ```mermaid
 flowchart LR
     subgraph Ingestion
-        A[CORE_ACCESS_LOGS]
-        B[Ingestion Layer]
+        A["CORE_ACCESS_LOGS"]
+        B["Ingestion Layer"]
     end
 
     subgraph Storage
-        C[Lakehouse - Raw Zone]
+        C["Lakehouse - Raw Zone"]
     end
 
     subgraph Feature_Engineering
-        D[Daily Aggregation Job (Airflow_Spark)]
-        E[Feature Store - employee_behavior_features]
+        D["Daily Aggregation Job (Airflow/Spark)"]
+        E["Feature Store - employee_behavior_features"]
     end
 
     subgraph ML_and_Monitoring
-        F[ML Model - Insider Anomaly Detection]
-        G[Alert Engine / Dashboard]
+        F["ML Model - Insider Anomaly Detection"]
+        G["Alert Engine / Dashboard"]
     end
 
     A --> B --> C --> D --> E --> F --> G
+
