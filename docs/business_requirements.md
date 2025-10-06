@@ -146,7 +146,7 @@ flowchart LR
     end
 
     subgraph Feature_Engineering
-        D[Daily Aggregation Job (Airflow/Spark)]
+        D[Daily Aggregation Job (Airflow. Spark)]
         E[Feature Store - employee_behavior_features]
     end
 
