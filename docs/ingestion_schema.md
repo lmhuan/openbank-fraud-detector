@@ -168,11 +168,27 @@ erDiagram
     COMMON ||--o{ PCLOGS : contains
     COMMON ||--o{ CORE_ACCESS_LOGS : contains
 
+## 🧠 Feature Flow: Insider Behavior Monitoring
+
 ```mermaid
 flowchart LR
-    A[CORE_ACCESS_LOGS] --> B[Ingestion Layer]
-    B --> C[Lakehouse - Raw Zone]
-    C --> D[Daily Aggregation Job (Airflow/Spark)]
-    D --> E[Feature Store - employee_behavior_features]
-    E --> F[ML Model - Insider Anomaly Detection]
-    F --> G[Alert Engine / Dashboard]
+    subgraph Ingestion
+        A[CORE_ACCESS_LOGS]
+        B[Ingestion Layer]
+    end
+
+    subgraph Storage
+        C[Lakehouse - Raw Zone]
+    end
+
+    subgraph Feature_Engineering
+        D[Daily Aggregation Job (Airflow/Spark)]
+        E[Feature Store - employee_behavior_features]
+    end
+
+    subgraph ML_and_Monitoring
+        F[ML Model - Insider Anomaly Detection]
+        G[Alert Engine / Dashboard]
+    end
+
+    A --> B --> C --> D --> E --> F --> G
