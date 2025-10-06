@@ -17,7 +17,7 @@ The goal is to build a unified **batch + realtime ML pipeline** for monitoring t
 ---
 
 ## 📚 Documentation
-
+- 📄[Business Requirements — Ingestion Layer](docs/business_requirements.md)
 - 📄 [Master Plan](docs/master_plan.md)  
 - 📊 [Architecture](docs/architecture.md)  
 
