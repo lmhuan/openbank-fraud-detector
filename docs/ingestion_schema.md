@@ -169,4 +169,25 @@ erDiagram
     COMMON ||--o{ CORE_ACCESS_LOGS : contains
 
 
+flowchart LR
+    subgraph Ingestion
+        A[CORE_ACCESS_LOGS]
+        B[Ingestion Layer]
+    end
+
+    subgraph Storage
+        C[Lakehouse - Raw Zone]
+    end
+
+    subgraph Feature_Engineering
+        D[Daily Aggregation Job (Airflow/Spark)]
+        E[Feature Store - employee_behavior_features]
+    end
+
+    subgraph ML_and_Monitoring
+        F[ML Model - Insider Anomaly Detection]
+        G[Alert Engine / Dashboard]
+    end
+
+    A --> B --> C --> D --> E --> F --> G
 
