@@ -170,28 +170,3 @@ erDiagram
 
 
 
-#### 🅱 **Cách 2 (có thể dùng khoảng trắng — nếu đặt trong dấu ngoặc kép)**
-```markdown
-```mermaid
-flowchart LR
-    subgraph "Ingestion Layer"
-        A[CORE_ACCESS_LOGS]
-        B[Ingestion Layer]
-    end
-
-    subgraph "Storage Zone"
-        C[Lakehouse - Raw Zone]
-    end
-
-    subgraph "Feature Engineering"
-        D[Daily Aggregation Job (Airflow/Spark)]
-        E[Feature Store - employee_behavior_features]
-    end
-
-    subgraph "ML and Monitoring"
-        F[ML Model - Insider Anomaly Detection]
-        G[Alert Engine / Dashboard]
-    end
-
-    A --> B --> C --> D --> E --> F --> G
-
