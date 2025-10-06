@@ -168,10 +168,33 @@ erDiagram
     COMMON ||--o{ PCLOGS : contains
     COMMON ||--o{ CORE_ACCESS_LOGS : contains
 
+
+> ⚠️ Lưu ý: Dòng đầu tiên phải là **```mermaid**, sau đó **Enter** xuống dòng rồi mới bắt đầu `flowchart LR`.
+
+---
+
+Nếu bạn muốn nó **đẹp và trực quan hơn** (có grouping thành từng lớp), bạn có thể dùng bản mở rộng dưới đây, GitHub cũng hỗ trợ luôn 👇
+
+```markdown
+```mermaid
 flowchart LR
-    A[CORE_ACCESS_LOGS] --> B[Ingestion Layer]
-    B --> C[Lakehouse - Raw Zone]
-    C --> D[Daily Aggregation Job (Airflow/Spark)]
-    D --> E[Feature Store - employee_behavior_features]
-    E --> F[ML Model - Insider Anomaly Detection]
-    F --> G[Alert Engine / Dashboard]
+    subgraph Ingestion
+        A[CORE_ACCESS_LOGS]
+        B[Ingestion Layer]
+    end
+
+    subgraph Storage
+        C[Lakehouse - Raw Zone]
+    end
+
+    subgraph Feature_Engineering
+        D[Daily Aggregation Job (Airflow/Spark)]
+        E[Feature Store - employee_behavior_features]
+    end
+
+    subgraph ML_and_Monitoring
+        F[ML Model - Insider Anomaly Detection]
+        G[Alert Engine / Dashboard]
+    end
+
+    A --> B --> C --> D --> E --> F --> G
