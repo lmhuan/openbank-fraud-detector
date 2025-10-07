@@ -1,4 +1,4 @@
-# 🏗️ Final Architecture — On-Prem / Hybrid 
+# 🏗️ Architecture — On-Prem / Hybrid 
 
 Phiên bản kiến trúc này giữ **dữ liệu nhạy cảm trên hạ tầng trong nước (on-prem)**,  dùng **Delta Lake + Spark + Kafka + Feast + MLflow** làm nền tảng Lakehouse. Hỗ trợ **hybrid compute** (compute trên cloud chỉ khi có private link / policy cho phép) — nhưng **raw data không rời khỏi on-prem**.
 
