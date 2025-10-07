@@ -77,9 +77,4 @@ flowchart TB
     Gov -.-> MLFLOW
     Gov -.-> SERVE
 
-> Ghi chú ngắn:
-> - Tất cả thành phần dữ liệu (Bronze/Silver/Gold) lưu **on-prem** (MinIO/HDFS + Delta).  
-> - Compute có thể là **Spark on-prem (K8s/YARN)**; nếu cần scale cho ML, chỉ cho compute cloud kết nối qua **private link** và không cho phép xuất raw data.  
-> - Governance (Ranger/Atlas/KMS) đảm bảo RBAC, masking, lineage, audit theo yêu cầu NHNN.
 
----
