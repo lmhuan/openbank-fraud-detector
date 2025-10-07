@@ -1,6 +1,6 @@
 # 🏗️ Final Architecture — On-Prem / Hybrid 
 
-Phiên bản kiến trúc này giữ **dữ liệu nhạy cảm trên hạ tầng trong nước (on-prem)**, loại bỏ Exadata và dùng **Delta Lake + Spark + Kafka + Feast + MLflow** làm nền tảng Lakehouse. Hỗ trợ **hybrid compute** (compute trên cloud chỉ khi có private link / policy cho phép) — nhưng **raw data không rời khỏi on-prem**.
+Phiên bản kiến trúc này giữ **dữ liệu nhạy cảm trên hạ tầng trong nước (on-prem)**,  dùng **Delta Lake + Spark + Kafka + Feast + MLflow** làm nền tảng Lakehouse. Hỗ trợ **hybrid compute** (compute trên cloud chỉ khi có private link / policy cho phép) — nhưng **raw data không rời khỏi on-prem**.
 
 ---
 
@@ -76,3 +76,10 @@ flowchart TB
     Gov -.-> FEAST
     Gov -.-> MLFLOW
     Gov -.-> SERVE
+
+> Ghi chú ngắn:
+> - Tất cả thành phần dữ liệu (Bronze/Silver/Gold) lưu **on-prem** (MinIO/HDFS + Delta).  
+> - Compute có thể là **Spark on-prem (K8s/YARN)**; nếu cần scale cho ML, chỉ cho compute cloud kết nối qua **private link** và không cho phép xuất raw data.  
+> - Governance (Ranger/Atlas/KMS) đảm bảo RBAC, masking, lineage, audit theo yêu cầu NHNN.
+
+---
