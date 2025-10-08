@@ -1,60 +1,112 @@
-# 🏦 OpenBank Fraud Detector
+# 💳 OpenBank Fraud & Risk Detection
 
-An open-source project for **bank transaction fraud detection** in Vietnam.  
-The goal is to build a unified **batch + realtime ML pipeline** for monitoring transactions across multiple channels (CoreBanking, ATM, E-Banking, SWIFT, CITAD, PC logs...).
-
----
-
-## 🚀 Features
-
-- 📥 **Data Ingestion** from multiple sources: CoreBanking, ATM, Internet Banking, SWIFT, CITAD, workstation logs.  
-- 🗄️ **Lakehouse Architecture**: combining batch ETL (Airflow/Spark) and streaming (Kafka/Flink).  
-- 📊 **Feature Store** (Feast/Redis) for both training and realtime scoring.  
-- 🤖 **Machine Learning Models**: batch training and realtime scoring APIs.  
-- 🛡️ **Risk Scoring Engine**: hybrid rules + explainable AI (SHAP/LIME).  
-- 📈 **Dashboard & APIs**: visualization and integration with existing banking monitoring systems.  
+> **An open-source project** for developing a modern, AI-powered fraud and insider behavior detection system for Vietnamese banks — built on a **Hybrid Azure Databricks Lakehouse architecture**, fully compliant with **State Bank of Vietnam (NHNN)** data regulations.
 
 ---
 
-## 📚 Documentation
-- 📄[Business Requirements — Ingestion Layer](docs/business_requirements.md)
-- 📄 [Master Plan](docs/master_plan.md)  
-- 📊 [Architecture](docs/architecture.md)  
+## 🚀 Overview
+
+OpenBank Fraud & Risk Detection enables financial institutions to:
+
+- Integrate data from multiple banking systems (CoreBanking, CITAD, SWIFT, ATM, eBanking, CRM, Logs, etc.)  
+- Detect **fraudulent transactions** and **insider misuse behaviors** using AI/ML models.  
+- Operate securely on a **hybrid Azure Databricks** platform where all data remains **within Vietnam’s borders**.  
+- Build a unified **Lakehouse foundation** for ML, analytics, and regulatory compliance.
 
 ---
 
-## 📂 Project Structure
+## 🏗️ System Architecture
 
+The system is organized into **four logical layers**:
 
----
+| Layer | Description |
+|-------|--------------|
+| **1️⃣ Data Ingestion** | Collects data from on-prem systems (CoreBanking, CITAD, SWIFT, ATM, eBanking, Logs...) |
+| **2️⃣ Lakehouse Layer** | Stores, cleanses, and aggregates data using Delta Lake (ADLS Gen2) |
+| **3️⃣ ML / Feature Layer** | Generates features, trains, and serves AI/ML models |
+| **4️⃣ BI / Analytics Layer** | Provides dashboards, alerts, and real-time risk monitoring |
 
-## 🛠️ Tech Stack
-
-- **Data Processing**: Apache Spark, Apache Flink  
-- **Streaming**: Apache Kafka  
-- **Workflow Orchestration**: Apache Airflow  
-- **Storage**: Data Lakehouse (Delta Lake / Iceberg)  
-- **ML/AI**: Python (scikit-learn, PyTorch, TensorFlow), Java (optional)  
-- **Dashboard**: Streamlit, Plotly Dash  
-- **APIs**: REST/gRPC  
+📘 **Detailed architecture:** [System Architecture](./docs/architecture.md)
 
 ---
 
-## 🤝 Contributing
+## ☁️ Azure Deployment
 
-We welcome contributions from the community:  
-1. Fork the repository  
-2. Create a new branch (`git checkout -b feature/my-feature`)  
-3. Commit your changes (`git commit -m "Add my feature"`)  
-4. Push the branch (`git push origin feature/my-feature`)  
-5. Open a Pull Request  
+The platform is deployed on **Azure Databricks (Private VNet)** with data storage in **ADLS Gen2 (Vietnam region)**.  
+Integration uses **Azure Data Factory (Self-hosted IR)**, **Event Hubs / Kafka**, and **Unity Catalog** for secure data governance.
+
+📘 **Deployment guide:** [Azure Deployment Guide](./docs/azure_deployment.md)
 
 ---
 
-## 📢 Announcement
+## 🧠 Machine Learning & AI
 
-The **OpenBank Fraud Detector** project was created to build a collaborative community of data engineers, ML practitioners, and banking experts in Vietnam to fight financial fraud.  
-
-👉 If you’re interested, please **star this repo** ⭐, open an **issue**, or join development with us!  
+- Model training and tracking using **MLflow**  
+- Feature management with **Databricks Feature Store**  
+- Real-time inference via **Databricks Model Serving / Azure Function**  
+- Key use cases:
+  - 🕵️ Fraud Detection (transactions, ATM, eBanking)  
+  - 👨‍💻 Insider Behavior Monitoring (employee access logs)  
+  - 💰 Risk Scoring and Customer Segmentation  
 
 ---
+
+## 🧩 Implementation Roadmap
+
+The master plan outlines the end-to-end development journey:
+
+1. Architecture & Infrastructure design  
+2. Ingestion & Lakehouse pipeline implementation  
+3. ML/Feature development  
+4. BI & Alert integration  
+5. Testing, validation, and NHNN compliance audit  
+
+📘 **See the plan:** [Master Plan](./docs/master_plan.md)
+
+---
+
+## 🗂️ Repository Structure
+
+openbank-fraud-detector/
+├── docs/
+│ ├── architecture.md # System architecture (v3.2)
+│ ├── azure_deployment.md # Azure Databricks deployment guide
+│ ├── ingestion_schema.md # Ingestion schema & feature flow
+│ └── master_plan.md # Implementation roadmap
+├── src/
+│ ├── python/ingestion/ # Ingestion & streaming pipelines
+│ ├── ml/ # ML training scripts & notebooks
+│ └── jobs/ # Databricks workflows
+├── infra/
+│ └── terraform/ # IaC configuration for Azure resources
+└── README.md
+
+---
+
+## 🧰 Contributing
+
+We welcome community contributions to improve the system, add connectors, and enhance ML use cases.
+
+### 🔹 How to Contribute
+1. Fork this repository  
+2. Create a new branch: `git checkout -b feature/your-feature`  
+3. Commit your changes: `git commit -m "Add new feature"`  
+4. Push the branch: `git push origin feature/your-feature`  
+5. Open a Pull Request 🎉  
+
+---
+
+## 📜 License
+
+This project is released under the **MIT License**, allowing free use and modification for research, testing, and production deployment under compliance constraints.
+
+---
+
+## 👥 Maintainers & Contact
+
+**OpenBank Vietnam Initiative (Community Project)**  
+📧 Contact: [openbank.ai.lab@gmail.com](mailto:openbank.ai.lab@gmail.com)
+
+---
+
+> 💡 “AI-driven fraud detection for secure, transparent, and compliant banking in Vietnam.”
