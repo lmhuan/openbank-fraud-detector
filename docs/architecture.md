@@ -47,7 +47,6 @@
 
 ### **Luồng dữ liệu minh họa**
 
-```mermaid
 flowchart LR
     subgraph OnPrem["🏢 On-Prem Data Sources"]
         CB[Core Banking]
@@ -56,7 +55,7 @@ flowchart LR
         ATM[ATM / POS]
         EB[E-Banking / Mobile]
         CRM[CRM / HR / Risk]
-        PC[Workstation Logs (IP, Domain, Actions)]
+        PC[Workstation Logs - IP / Domain / Actions]
     end
 
     subgraph Ingestion["☁️ Data Ingestion Layer"]
@@ -76,3 +75,4 @@ flowchart LR
     ATM & EB & PC --> KAFKA --> BR
     CB --> CDC --> BR
     BR --> SI --> GO
+
