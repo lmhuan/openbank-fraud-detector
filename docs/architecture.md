@@ -59,6 +59,7 @@ flowchart LR
     end
 
 
+
     subgraph Ingestion["☁️ Data Ingestion Layer"]
         ADF["Azure Data Factory (Self-hosted IR)"]
         KAFKA["Kafka / Event Hubs (Streaming)"]
