@@ -1,80 +1,61 @@
-# 🏗️ Architecture — On-Prem / Hybrid 
+# 🏗️ System Architecture — OpenBank Fraud & Risk Detection
 
-Phiên bản kiến trúc này giữ **dữ liệu nhạy cảm trên hạ tầng trong nước (on-prem)**,  dùng **Delta Lake + Spark + Kafka + Feast + MLflow** làm nền tảng Lakehouse. Hỗ trợ **hybrid compute** (compute trên cloud chỉ khi có private link / policy cho phép) — nhưng **raw data không rời khỏi on-prem**.
+> **Phiên bản:** 2.0 (Azure Databricks — On-Prem Data Residency Compliant)  
+> **Ngày cập nhật:** 2025-10-08  
+> **Mục tiêu:** Xây dựng kiến trúc tổng thể cho hệ thống phát hiện gian lận & hành vi bất thường trong ngân hàng Việt Nam, đáp ứng yêu cầu bảo mật và quy định của NHNN.
+
+---
+ 
+## 🌐 Tổng quan kiến trúc 4 tầng
+
+Hệ thống được chia thành 4 tầng logic:
+
+| Tầng | Vai trò chính | Thành phần chính |
+|------|----------------|------------------|
+| **1️⃣ Data Ingestion** | Thu thập dữ liệu từ tất cả nguồn nghiệp vụ | Kafka, Azure Data Factory, Airflow, Flink |
+| **2️⃣ Lakehouse Layer** | Lưu trữ & xử lý dữ liệu chuẩn hóa | Delta Lake (ADLS Gen2), Databricks Runtime |
+| **3️⃣ ML / Feature Layer** | Sinh feature, huấn luyện, triển khai mô hình | Databricks Feature Store, MLflow |
+| **4️⃣ BI / Analytics Layer** | Trực quan hóa, cảnh báo, giám sát | Databricks SQL, Power BI, Alert Engine |
 
 ---
 
+## 🧩 Kiến trúc chi tiết (Mermaid Diagram)
+
 ```mermaid
 flowchart TB
-    %% Sources
-    subgraph Sources["Data Sources (On-Prem)"]
-        CB["CoreBanking"]
-        ATM["ATM"]
-        EB["E-Banking / Mobile"]
-        SWIFT["SWIFT"]
-        CITAD["CITAD (VN)"]
-        PC["Workstation Logs"]
-        ACCESS["Core Access Logs"]
+    subgraph Ingestion["1️⃣ Data Ingestion Layer"]
+        KAFKA["Event Hubs / Kafka (Streaming)"]
+        ADF["Azure Data Factory / Airflow (Batch)"]
+        CDC["Debezium / GoldenGate (CDC)"]
     end
 
-    %% Ingestion
-    subgraph Ingestion["Ingestion Layer"]
-        KAFKA["Kafka (On-Prem)"]
-        BATCH["Batch Loader (Airflow + Spark)"]
-        AUTOLOADER["Autoloader / Structured Streaming"]
+    subgraph Lakehouse["2️⃣ Lakehouse Layer (Delta Lake on ADLS Gen2)"]
+        BRONZE["Bronze Zone (Raw)"]
+        SILVER["Silver Zone (Cleaned)"]
+        GOLD["Gold Zone (Curated / Aggregated)"]
     end
 
-    %% Lakehouse zones
-    subgraph Lakehouse["Delta Lakehouse (On-Prem)"]
-        BRONZE["Bronze - Raw (Delta)"]
-        SILVER["Silver - Cleaned (Delta)"]
-        GOLD["Gold - Curated / Feature Ready (Delta)"]
+    subgraph ML["3️⃣ ML & Feature Layer"]
+        FEAST["Feature Store (Databricks Feature Store)"]
+        MLFLOW["MLflow (Training + Registry)"]
+        SERVE["Model Serving / Azure Function"]
     end
 
-    %% Feature & ML
-    subgraph Feature_ML["Feature & ML"]
-        FEAT_PIPE["Feature Pipelines (Spark)"]
-        FEAST["Feast Feature Store (On-Prem)"]
-        MLFLOW["MLflow (On-Prem)"]
-        MODEL_REG["Model Registry"]
-        SERVE["Realtime Scoring / Serving"]
+    subgraph BI["4️⃣ BI & Analytics Layer"]
+        SQL["Databricks SQL / Power BI (Direct Lake)"]
+        ALERT["Alert Engine / SOC Dashboard"]
     end
 
-    %% Governance & Infra
-    subgraph Gov["Governance & Security"]
-        RANGER["Apache Ranger (RBAC)"]
-        ATLAS["Apache Atlas (Lineage)"]
-        KMS["KMS / HSM (On-Prem)"]
-        SIEM["SIEM / Audit Logs"]
+    subgraph Security["Governance & Security"]
+        UC["Unity Catalog (Data Governance)"]
+        KV["Azure Key Vault (CMK)"]
+        MON["Azure Monitor / Log Analytics"]
     end
 
-    %% Visualization & Alerts
-    subgraph Ops["Visualization & Alerting"]
-        DASH["Superset / PowerBI (On-Prem)"]
-        ALERT["Alert Engine / SOC Integration"]
-    end
-
-    %% Connections
-    CB & ATM & EB & SWIFT & CITAD & PC & ACCESS --> KAFKA
-    CB & ATM & EB & SWIFT & CITAD & PC & ACCESS --> BATCH
-
-    KAFKA --> AUTOLOADER
-    BATCH --> BRONZE
-    AUTOLOADER --> BRONZE
-
-    BRONZE --> SILVER --> GOLD
-    GOLD --> FEAT_PIPE --> FEAST
-    FEAST --> MLFLOW
-    MLFLOW --> MODEL_REG --> SERVE
+    KAFKA & ADF & CDC --> BRONZE --> SILVER --> GOLD
+    GOLD --> FEAST --> MLFLOW --> SERVE
+    GOLD --> SQL
     SERVE --> ALERT
-    GOLD --> DASH
-
-    %% Governance links (policy/control)
-    Gov -.-> BRONZE
-    Gov -.-> SILVER
-    Gov -.-> GOLD
-    Gov -.-> FEAST
-    Gov -.-> MLFLOW
-    Gov -.-> SERVE
-
-
+    Security -.-> Lakehouse
+    Security -.-> ML
+    Security -.-> BI
