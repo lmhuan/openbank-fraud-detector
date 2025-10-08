@@ -61,7 +61,7 @@ The master plan outlines the end-to-end development journey:
 4. BI & Alert integration  
 5. Testing, validation, and NHNN compliance audit  
 
-📘 **See the plan:** 
+📘 **See the plan:**   
 
 ---
 
