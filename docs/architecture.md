@@ -58,6 +58,7 @@ flowchart LR
         PC[Workstation Logs - IP / Domain / Actions]
     end
 
+
     subgraph Ingestion["☁️ Data Ingestion Layer"]
         ADF["Azure Data Factory (Self-hosted IR)"]
         KAFKA["Kafka / Event Hubs (Streaming)"]
