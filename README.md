@@ -67,20 +67,6 @@ The master plan outlines the end-to-end development journey:
 
 ## 🗂️ Repository Structure
 
-openbank-fraud-detector/
-├── docs/
-│ ├── architecture.md # System architecture (v3.2)
-│ ├── azure_deployment.md # Azure Databricks deployment guide
-│ ├── ingestion_schema.md # Ingestion schema & feature flow
-│ └── master_plan.md # Implementation roadmap
-├── src/
-│ ├── python/ingestion/ # Ingestion & streaming pipelines
-│ ├── ml/ # ML training scripts & notebooks
-│ └── jobs/ # Databricks workflows
-├── infra/
-│ └── terraform/ # IaC configuration for Azure resources
-└── README.md
-
 ---
 
 ## 🧰 Contributing
@@ -105,7 +91,7 @@ This project is released under the **MIT License**, allowing free use and modifi
 ## 👥 Maintainers & Contact
 
 **OpenBank Vietnam Initiative (Community Project)**  
-📧 Contact: [openbank.ai.lab@gmail.com](mailto:openbank.ai.lab@gmail.com)
+📧 Contact: [mr.huan@gmail.com](mailto:mr.huan@gmail.com)
 
 ---
 
